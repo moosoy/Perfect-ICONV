@@ -33,8 +33,8 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-      .target(name: "ICONVApi", dependencies: []),
-      .target(name: "PerfectICONV", dependencies: ["ICONVApi"]),
+    //   .target(name: "ICONVApi", dependencies: []),
+      .target(name: "PerfectICONV", dependencies: []),
       .testTarget(name: "PerfectICONVTests", dependencies: ["PerfectICONV"])
     ]
 )#endif

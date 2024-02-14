@@ -19,7 +19,7 @@
 #if os(Linux)
 import ICONVApiLinux
 #else
-import ICONVApi
+import Darwin.POSIX.iconv
 #endif
 
 /// class Iconv
