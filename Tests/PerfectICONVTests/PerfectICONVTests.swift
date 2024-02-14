@@ -5,7 +5,7 @@ import Foundation
 class PerfectICONVTests: XCTestCase {
     func testExample() {
       do {
-        let i = try Iconv()
+        let i = try Iconv(from: .GB2312)
         let bytes:[UInt8] =  [0xd6, 0xd0, 0xb9, 0xfa, 0x0a]
         guard let cn = i.utf8(buf: bytes) else {
           XCTFail("fault")

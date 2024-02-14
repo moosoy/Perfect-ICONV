@@ -39,7 +39,7 @@ public class Iconv {
   /// - parameters:
   ///   - from: representable string, the original encoding
   ///   - to: representable string, the destinated encoding
-  public init(from: CodePage = .GB2312, to: CodePage = .UTF_8) throws {
+  public init(from: CodePage, to: CodePage = .UTF_8) throws {
     cd = iconv_open(to.rawValue, from.rawValue)
     guard cd?.hashValue != -1 else {
       throw Exception.INVALID_ENCODING
@@ -54,6 +54,23 @@ public class Iconv {
     iconv_close(handle)
   }//end init
 
+  /// "illegal sequence discard and continue"
+  public var discardIllegalSequence: Bool {
+    get {
+      var toRet: Int32 = 0
+      iconvctl(cd, ICONV_GET_DISCARD_ILSEQ, &toRet)
+      return toRet == 1
+    }
+    set {
+      var toRet:Int32
+      if newValue {
+          toRet = 1
+      } else {
+          toRet = 0
+      }
+      iconvctl(cd, ICONV_SET_DISCARD_ILSEQ, &toRet)
+    }
+  }
   /// convert a buffer to a new one, must release after calling
   /// - parameters:
   ///   - buf: input buffer
